@@ -1,0 +1,32 @@
+添加jdk和hadoop环境，在bash.bashrc中添加：
+export JAVA_HOME=/usr/local/jdk1.8 
+export JRE_HOME=${JAVA_HOME}/jre
+export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib
+export PATH=.:${JAVA_HOME}/bin:$PATH
+export HADOOP_HOME=/opt/bigdata/hadoop-2.8.5
+PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin
+
+该源后可能会出现的问题：
+
+解决Ubuntu 16.04系统下出现
+E: 无法下载 http://ppa.launchpad.net/fcitx-team/nightly/ubuntu/dists/xenial/main/binary-amd64/Packages 404 Not Found 
+解决办法：
+https://www.bbsmax.com/A/Vx5MXnBpJN/
+
+修改用户名、组名
+*** 假设旧组名和用户名是 sftpold:sftpold
+*** 将要改成 sftpnew:sftpnew
+1. kill 该用户的进程
+	sudo pkill -u sftpold
+	sudo pkill -9 -u sftpold
+2.  修改用户名
+	sudo usermod -l sftpnew sftpold
+	** sudo groupmod -n 新用户名 旧用户名
+	** 将 sftpold 改名为 sftpnew
+4. 修改组名
+	sudo groupmod -n sftpnew sftpold
+	** sudo groupmod -n 新组 旧组
+	** 将 组sftp075 改名为 组sftp073
+5、确认
+	cat /etc/passwd | grep sftpnew
+
